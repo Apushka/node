@@ -49,7 +49,7 @@ yargs.command({
 
 yargs.command({
   command: "edit",
-  describe: "Change note by Id",
+  describe: "Edit note by Id",
   builder: {
     id: {
       type: "string",
