@@ -17,6 +17,17 @@ async function addNote(title) {
   console.log(chalk.green.inverse("Note was added"));
 }
 
+async function editNote(id, title) {
+  const notes = await getNotes();
+  const noteToUpdate = notes.find((note) => note.id === id);
+  if (!noteToUpdate) {
+    return console.log(chalk.bgRed(`Note ${id} not found in database`));
+  }
+  noteToUpdate.title = title;
+  await fs.writeFile(notesPath, JSON.stringify(notes));
+  console.log(chalk.green.inverse("Note was edited"));
+}
+
 async function removeNote(id) {
   const notes = await getNotes();
   const noteToRemove = notes.find((note) => note.id === id);
@@ -45,4 +56,5 @@ module.exports = {
   addNote,
   printNotes,
   removeNote,
+  editNote,
 };
